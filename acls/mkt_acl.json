@@ -1,0 +1,12 @@
+{
+  "access_control_list": [
+    {
+      "group_name": "marketing",
+      "all_permissions": [
+        {
+          "permission_level": "CAN_USE"
+        }
+      ]
+    }
+  ]
+}
