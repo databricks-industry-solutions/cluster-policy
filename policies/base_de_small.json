@@ -1,1 +1,38 @@
-{}
+{
+  "dbus_per_hour": {
+    "type": "range",
+    "value": 50
+  },
+  "spark_version": {
+    "type": "regex",
+    "pattern": "11\\.3\\.x-scala.*"
+  },
+  "node_type_id": {
+    "type": "regex",
+    "pattern": "[cr][6-7][gd]*.[2-4]{0,1}xlarge"
+  },
+  "driver_node_type_id": {
+    "type": "regex",
+    "pattern": "[cr][6-7][gd]*.[2-4]{0,1}xlarge"
+  },
+  "autoscale.min_workers": {
+    "type": "fixed",
+    "value": 1,
+    "hidden": true
+  },
+  "autoscale.max_workers": {
+    "type": "range",
+    "maxValue": 3,
+    "defaultValue": 2
+  },
+  "autotermination_minutes": {
+    "type": "fixed",
+    "value": 30,
+    "hidden": true
+  },
+  "custom_tags.COST_CENTER": {
+    "type": "fixed",
+    "value": "data engineering",
+    "hidden": true
+  }
+}

@@ -15,6 +15,9 @@ on:
         description: Which policy file to deploy?
         type: string
         required: true
+      acl:
+        description: Associated ACL to publish with policy? (Leave blank for none)
+        type: string
       inherit_from:
         description: Which policy should this one override?
         type: string

@@ -1,7 +1,7 @@
 {
   "dbus_per_hour": {
     "type": "range",
-    "value": 100
+    "value": 50
   },
   "spark_version": {
     "type": "regex",
@@ -12,9 +12,8 @@
     "pattern": "[cr][6-7][gd]*.[2-4]{0,1}xlarge"
   },
   "driver_node_type_id": {
-    "type": "fixed",
-    "value": "r6g.2xlarge",
-    "hidden": true
+    "type": "regex",
+    "pattern": "[cr][6-7][gd]*.[2-4]{0,1}xlarge"
   },
   "autoscale.min_workers": {
     "type": "fixed",
@@ -32,11 +31,8 @@
     "hidden": true
   },
   "custom_tags.COST_CENTER": {
-    "type": "allowlist",
-    "values": [
-      "product",
-      "engineering",
-      "data science"
-    ]
+    "type": "fixed",
+    "value": "data science",
+    "hidden": true
   }
 }
