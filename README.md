@@ -3,11 +3,13 @@
 [![CLOUD](https://img.shields.io/badge/CLOUD-ALL-blue?logo=googlecloud&style=for-the-badge)](https://cloud.google.com/databricks)
 [![POC](https://img.shields.io/badge/POC-10_days-green?style=for-the-badge)](https://databricks.com/try-databricks)
 
-*Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.*
+*Data becomes useful only when it is converted to insights. Data democratization is the self-serve process of getting data into the hands of people that can add value to it without undue process bottlenecks and without expensive and embarrassing faux pas moments. Governance is needed to avoid anarchy for users, ensuring correct access privileges not only to the data but also to the underlying compute needed to crunch the data.*
+
+*Governance of users ensures the right entities and groups have access to data and compute and enterprise-level identity providers usually enforce this. Governance of data determines who has access to what datasets at the row and column level. Enterprise catalogs and Unity Catalog help enforce that. The most expensive part of a data pipeline is the underlying compute. It usually requires the cloud infra team to set up privileges to facilitate access, after which Databricks admins can set up cluster policies to ensure the right principals have access to the needed compute controls.*
 
 ___
-<john.doe@databricks.com>
-
+<anindita.mahapatra@databricks.com>
+<stephen.carman@databricks.com>
 ___
 
 &copy; 2022 Databricks, Inc. All rights reserved. The source in this notebook is provided subject to the Databricks License [https://databricks.com/db-license-source].  All included or referenced third party libraries are subject to the licenses set forth below.
@@ -24,11 +26,16 @@ Any issues discovered through the use of this project should be filed as GitHub 
 
 Purpose:
 
-# Cluster Policy
-* Define policy
+# Benefits of Cluster Policy
+Cluster Policies serve as a bridge between users and the cluster usage-related privileges that they have access. Simplification of platform usage and effective cost control are the two main benefits of cluster policies. Users have fewer knobs to try leading to fewer inadvertent mistakes, especially around cluster sizing. This leads to better user experience, improved productivity, security,  and administration aligned to corporate governance. Setting limits on max usage per user, per workload, per hour usage, and limiting access to resource types whose values contribute to cost helps to have predictable usage bills. Eg. restricted node type, DBR version with tagging & autoscaling
+
+* Cluster Policy Defiition
+On Databricks, there are several ways to bring up compute resources - from the Clusters UI, Jobs launching the specified compute resources, and via REST APIs. 
+A Databricks admin is tasked with creating, deploying, and managing cluster policies to define rules that dictate conditions to create, use, and limit compute resources at the enterprise level. Typically, this is adapted and tweaked by the various Lines of Business (LOBs) to meet their requirements and align with enterprise-wide guidelines. There is a lot of flexibility in defining the policies as each control element offers several strategies for setting bounds.
+
 * Assign policy preferably to groups
 
-* Users will see only those policies that they have bee assiged
+* Users will see only those policies that they have been assiged
 
 # Platform Team
 * Create base cluster policies
@@ -60,6 +67,24 @@ Purpose:
 ## Available by LOB, environment, persona, size  
 * mkt_dev_analyst_medium.json
 * mkt_prod_analyst_medium.json
+
+# Rolling out Cluster Policies in an enterprise
+* Planning: Articulate enterprise governance goals around controlling the budget, and usage attribution via tags so that cost centers get accurate chargebacks, runtime versions for compatibility and support requirements, and regulatory audit requirements. The unspecified cluster policy provides a backdoor route for bypassing the cluster policies and should be suppressed. The process should handle exception scenarios eg. requests for an unusually large cluster using a formal approval process. Key success metrics should be defined so that the effectiveness of the cluster policies can be quantified. 
+A good naming convention helps with self-describing and management needs so that a user instinctively knows which one to use and an admin recognizes which LOB it belongs to. For eg. mkt_prod_analyst_med denotes the LOB, environment, persona, and t-shirt size.
+* Defining: Admins should create a set of base cluster policies that are inherited by the LOBs and adapted.
+* Deploying: Cluster Policies should be carefully considered prior to rollout. Frequent changes are not ideal as it confuses the end users and does not serve the intended purpose. There will be occasions to introduce a new policy or tweak an existing one and such changes are best done using automation. Once a cluster policy has been changed, it affects new compute spun subsequently. There may be older clusters running with the old policy and the ‘Clusters’ tab will help identify the old ones (Which clusters are out of sync) in case the owners need to be notified of the change.
+* Evaluating: The success metrics defined in the planning phase should be evaluated on an ongoing basis to see if some tweaks are needed both at the policy and process levels. 
+* Monitoring: Periodic scans of clusters should be done to ensure that no cluster is being spun up without an associated cluster policy. 
+
+# Cluster Policy Management & Automation
+Cluster policies are defined in JSON using the Cluster Policies API 2.0 and Permissions API 2.0 (Cluster policy permissions) that manage which users can use which cluster policies.  It supports all cluster attributes controlled with the Clusters API 2.0 along with additional synthetic attributes such as max DBU-hour, and a limit on the source that creates a cluster. 
+
+* Terraform can be used to deploy a new workspace and the initial policy definitions
+* Subsequent updates to policy definitions across workspaces should be managed by admin personas using CI/CD pipelines. The diagram above shows Giithub workflows managed via Github actions to deploy policy definitions ad the associated user permissions into the chosen workspaces
+* REST APIs can be leveraged to monitor clusters in the workspace either explicitly or implicitly using the SAT tool to ensure enterprise-wide compliance.
+
+# Serverless
+In the absence of a serverless architecture, cluster policies are managed by admins to expose control knobs to create, manage and limit compute resources. Serverless will likely alleviate this responsibility off the admins to a certain extent. Regardless, these knobs are necessary to provide flexibility in the creation of compute to match the specific needs and profile of the workload.
 
 
 # Setup Github Workflow 
