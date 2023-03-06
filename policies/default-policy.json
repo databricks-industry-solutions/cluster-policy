@@ -1,0 +1,11 @@
+{
+    "dbus_per_hour" : {
+      "type" : "range",
+      "maxValue" : 10
+    },
+    "autotermination_minutes" : {
+      "type" : "fixed",
+      "value" : 20,
+      "hidden" : true
+    }
+  }
