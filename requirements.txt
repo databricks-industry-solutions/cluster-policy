@@ -1,1 +1,1 @@
-databricks-cli==0.17.4
+databricks-cli==0.17.5
