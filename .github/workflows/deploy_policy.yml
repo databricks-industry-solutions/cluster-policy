@@ -50,6 +50,10 @@ jobs:
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_PROD_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_PROD_TOKEN }}
+          environment: ${{ github.event.environment }}
+          policy: ${{ github.event.policy }}
+          inherit_from: ${{ github.event.inherit_from }}
+          acl: ${{ github.event.acl }}
         run: |
           python deploy.py
 
