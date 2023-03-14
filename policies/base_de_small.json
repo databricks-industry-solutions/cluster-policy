@@ -1,7 +1,11 @@
 {
   "dbus_per_hour": {
-    "type": "range",
+    "type": "fixed",
     "value": 50
+  },
+  "spark_conf.spark.databricks.cluster.profile": {
+    "type": "forbidden",
+    "hidden": true
   },
   "spark_version": {
     "type": "regex",
