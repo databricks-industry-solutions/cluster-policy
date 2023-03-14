@@ -24,7 +24,6 @@ if __name__ == '__main__':
     data = {"name": full_policy_name}
 
     for policy in policy_list['policies']:
-        print(policy, full_policy_name)
         if policy['name'] == full_policy_name:
             data['policy_id'] = policy['policy_id']
             break
@@ -49,7 +48,7 @@ if __name__ == '__main__':
         with open(f'{acl}.json', 'r') as acl_file:
             # The databricks CLI does not have an easy way to update the ACLs on a specific cluster policy, so we have to
             # directly use the client. Not ideal, but I see no better way  right now.
-            print(policy_id)
+            policy_id = data['policy_id'] if policy_id is None else policy_id['policy_id']
             client.perform_query('PUT', f'/permissions/cluster-policies/{policy_id}', data=acl_file.read())
             log.info(f'Created acl for {policy_id} from {acl} in {environment}')
 
