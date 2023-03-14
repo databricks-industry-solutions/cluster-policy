@@ -24,6 +24,7 @@ if __name__ == '__main__':
     data = {"name": full_policy_name}
 
     for policy in policy_list['policies']:
+        print(policy, full_policy_name)
         if policy['name'] == full_policy_name:
             data['policy_id'] = policy['policy_id']
             break
