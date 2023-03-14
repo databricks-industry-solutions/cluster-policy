@@ -1,7 +1,6 @@
-![image](https://user-images.githubusercontent.com/86326159/206014015-a70e3581-e15c-4a10-95ef-36fd5a560717.png)
+![image](./docs/images/GovernanceSoution.png)
 
 [![CLOUD](https://img.shields.io/badge/CLOUD-ALL-blue?logo=googlecloud&style=for-the-badge)](https://cloud.google.com/databricks)
-[![POC](https://img.shields.io/badge/POC-10_days-green?style=for-the-badge)](https://databricks.com/try-databricks)
 
 * <b>Domain </b>: Governance 
 * <b>Challenge </b>: Control unnecessary wastage of compute resources by proper guardrails that democratize access to data to only privileged principals
