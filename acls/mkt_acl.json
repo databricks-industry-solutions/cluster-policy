@@ -1,12 +1,8 @@
 {
   "access_control_list": [
     {
-      "group_name": "marketing",
-      "all_permissions": [
-        {
-          "permission_level": "CAN_USE"
-        }
-      ]
+      "user_name": "stephen.carman@databricks.com",
+      "permission_level": "CAN_USE"
     }
   ]
 }
