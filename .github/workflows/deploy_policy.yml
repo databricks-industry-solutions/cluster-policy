@@ -43,7 +43,7 @@ jobs:
 
       - name: Install dependencies and project in dev mode
         run: |
-          pip install -r requirements.txt
+          pip install databricks-cli==0.17.5
 
       - name: Production Deploy Setup
         if: github.event.inputs.environment == 'production'
