@@ -1,11 +1,16 @@
-import json
 import logging
 import os
+import sys
+import json
 
 from databricks_cli.cluster_policies.api import ClusterPolicyApi
 from databricks_cli.sdk.api_client import ApiClient
 
 log = logging.Logger(name='policy-deployment', level='INFO')
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.DEBUG)
+log.addHandler(handler)
+
 db_host = os.getenv('DATABRICKS_HOST')
 db_token = os.getenv('DATABRICKS_TOKEN')
 environment = os.getenv('environment')
@@ -49,7 +54,7 @@ if __name__ == '__main__':
             # The databricks CLI does not have an easy way to update the ACLs on a specific cluster policy, so we have to
             # directly use the client. Not ideal, but I see no better way  right now.
             policy_id = data['policy_id']
-            client.perform_query('PUT', f'/permissions/cluster-policies/{policy_id}', data=acl_file.read())
+            client.perform_query('PUT', f'/permissions/cluster-policies/{policy_id}', data=json.loads(acl_file.read()))
             log.info(f'Created acl for {policy_id} from {acl} in {environment}')
 
     log.info(f'{full_policy_name} successfully deployed in {environment}')
