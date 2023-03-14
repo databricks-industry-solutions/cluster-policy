@@ -32,10 +32,10 @@ if __name__ == '__main__':
         log.info(f'Inheriting from {inherit_from} for {full_policy_name} in {environment}')
         data['policy_family_id'] = inherit_from
         with open(f'{policy_name}.json', 'r') as policy_file:
-            data['policy_family_definition_overrides'] = json.loads(policy_file.read())
+            data['policy_family_definition_overrides'] = policy_file.read()
     else:
         with open(f'{policy_name}.json', 'r') as policy_file:
-            data['definition'] = json.loads(policy_file.read())
+            data['definition'] = policy_file.read()
 
     if 'policy_id' not in data:
         log.info(f'Creating new policy {full_policy_name} in {environment}')
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         with open(f'{acl}.json', 'r') as acl_file:
             # The databricks CLI does not have an easy way to update the ACLs on a specific cluster policy, so we have to
             # directly use the client. Not ideal, but I see no better way  right now.
-            client.perform_query('PUT', f'/permissions/cluster-policies/{policy_id}', data=json.loads(acl_file.read()))
+            client.perform_query('PUT', f'/permissions/cluster-policies/{policy_id}', data=acl_file.read())
             log.info(f'Created acl for {policy_id} from {acl} in {environment}')
 
     log.info(f'{full_policy_name} successfully deployed in {environment}')
