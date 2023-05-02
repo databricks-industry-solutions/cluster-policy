@@ -1,7 +1,7 @@
 
 # Set up Git Workflow
 
-## Add secrets for each of the environments (Repo-> Settigs -> Secrets & Variables)
+## Add secrets for each of the environments (Repo-> Settings -> Secrets & Variables)
 Namely:
 *  DATABRICKS_PROD_HOST & DATABRICKS_PROD_TOKEN
 *  DATABRICKS_TEST_HOST & DATABRICKS_TEST_TOKEN
