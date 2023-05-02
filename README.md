@@ -86,7 +86,7 @@ Establish the change management process to allow new ones to be added or older o
 
 
 # Setup Github Workflow 
-* Please refer to the Setup.md uder docs
+* Please refer to the [setup guide](./docs/Setup.md)
 ___
 <anindita.mahapatra@databricks.com> <br>
 <stephen.carman@databricks.com>
@@ -94,12 +94,6 @@ ___
 
 &copy; 2023 Databricks, Inc. All rights reserved. The source in this notebook is provided subject to the Databricks License [https://databricks.com/db-license-source].  All included or referenced third party libraries are subject to the licenses set forth below.
 
-
-## Getting started
-
-Although specific solutions can be downloaded as .dbc archives from our websites, we recommend cloning these repositories onto your databricks environment. Not only will you get access to latest code, but you will be part of a community of experts driving industry best practices and re-usable solutions, influencing our respective industries. 
-
-<img width="500" alt="add_repo" src="https://user-images.githubusercontent.com/4445837/177207338-65135b10-8ccc-4d17-be21-09416c861a76.png">
 
 ## Project support 
 
